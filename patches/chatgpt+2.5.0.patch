@@ -1,0 +1,18 @@
+diff --git a/node_modules/chatgpt/build/index.js b/node_modules/chatgpt/build/index.js
+index 753f882..7c7df98 100644
+--- a/node_modules/chatgpt/build/index.js
++++ b/node_modules/chatgpt/build/index.js
+@@ -75,7 +75,12 @@ async function fetchSSE(url, options) {
+     error.statusCode = res.status;
+     error.statusText = res.statusText;
+     error.response = res;
+-    throw error;
++    if (res.status === 429) {
++      console.log(error);
++    }
++    else {
++      throw error;
++    }
+   }
+   const parser = createParser((event) => {
+     if (event.type === "event") {
