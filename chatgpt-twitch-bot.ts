@@ -13,7 +13,7 @@ const client = new tmi.Client({
     username: process.env.TWITCH_NAME,
     password: process.env.TWITCH_TOKEN,
   },
-  channels: ["chatgpt_bot_0001"],
+  channels: [process.env.TWITCH_CHANNEL as string],
 });
 
 client.connect();
@@ -42,7 +42,7 @@ client.on("message", (channel, tags, message, self) => {
 
       const response = await api.sendMessage(prompt);
 
-      client.say(channel, `@${tags.username}, ${response}}`);
+      client.say(channel, `@${tags.username}, ${response}`);
     })();
   }
 });
