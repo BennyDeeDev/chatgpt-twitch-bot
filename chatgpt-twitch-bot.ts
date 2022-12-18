@@ -38,7 +38,7 @@ client.on("message", async (channel, tags, message, self) => {
   const args = message.slice(1).split(" ");
   const command = args.shift()?.toLowerCase();
 
-  if (command === "!chatgpt test") {
+  if (command === "chatgpt test") {
     client.say(channel, `@${tags.username}, test`);
   } else if (command === "chatgpt") {
     const prompt = args.join(" ");

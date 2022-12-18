@@ -31,6 +31,14 @@ After all of that you can start the script with following line
 
 This will compile and run the typescript file on the fly
 
+A browser will open and ask you for a captcha solve it and only click once on the login button, the bot will do the rest.
+
+The bot will response when you type
+
+`!chatgpt what is the meaning of life?`
+
+Have fun with the bot!
+
 ## Known Problems
 
 You will run into a 429, if you ask chatgpt questions to fast.
