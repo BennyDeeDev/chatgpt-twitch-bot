@@ -33,6 +33,6 @@ This will compile and run the typescript file on the fly
 
 ## Known Problems
 
-I have tried to work on having conversations but unfortunately I always run into a 429, there is an extra branch if you would like to contribute
-
-Unfortunately you have to login with the captcha on every request...
+You will run into a 429, if you ask chatgpt questions to fast.
+The people from the chatgpt package are working on that.
+Unfortunately you have to relog with the captcha on every failed request...

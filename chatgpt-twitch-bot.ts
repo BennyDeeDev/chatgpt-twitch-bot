@@ -16,9 +16,21 @@ const client = new tmi.Client({
   channels: [process.env.TWITCH_CHANNEL as string],
 });
 
+let chatGPTAPI: ChatGPTAPI;
+
+(async () => {
+  const openAIAuth = await getOpenAIAuth({
+    email: process.env.OPENAI_EMAIL,
+    password: process.env.OPENAI_PASSWORD,
+  });
+
+  chatGPTAPI = new ChatGPTAPI({ ...openAIAuth });
+  await chatGPTAPI.ensureAuth();
+})();
+
 client.connect();
 
-client.on("message", (channel, tags, message, self) => {
+client.on("message", async (channel, tags, message, self) => {
   if (self || !message.startsWith("!")) {
     return;
   }
@@ -29,20 +41,10 @@ client.on("message", (channel, tags, message, self) => {
   if (command === "!chatgpt test") {
     client.say(channel, `@${tags.username}, test`);
   } else if (command === "chatgpt") {
-    (async () => {
-      const prompt = args.join(" ");
+    const prompt = args.join(" ");
 
-      const openAIAuth = await getOpenAIAuth({
-        email: process.env.OPENAI_EMAIL,
-        password: process.env.OPENAI_PASSWORD,
-      });
+    const response = await chatGPTAPI.sendMessage(prompt);
 
-      const api = new ChatGPTAPI({ ...openAIAuth });
-      await api.ensureAuth();
-
-      const response = await api.sendMessage(prompt);
-
-      client.say(channel, `@${tags.username}, ${response}`);
-    })();
+    client.say(channel, `@${tags.username}, ${response}`);
   }
 });
