@@ -41,6 +41,6 @@ Have fun with the bot!
 
 ## Known Problems
 
-You will run into a 429, if you ask chatgpt questions to fast.
+You will run into a 429, if you ask chatgpt questions too fast.
 The people from the chatgpt package are working on that.
 Unfortunately you have to relog with the captcha on every failed request...
